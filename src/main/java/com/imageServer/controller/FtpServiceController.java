@@ -30,8 +30,6 @@ public class FtpServiceController {
 
     @Autowired
     private FtpImageCacheService ftpImageCacheService;
-    private float signAlpha = (float) 1;
-    private float alpha = (float) 1;
 
     /**
      * 获取FTP文件服务器上的图像
