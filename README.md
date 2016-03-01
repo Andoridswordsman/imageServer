@@ -17,3 +17,6 @@
 	- 直接获取显示200 * 200 像素的业务图片 : 
 	http://webRoot:8080/image?path=/image/user/demo.jpg&width=200&height=200
 	- 具体的param参数的说明请查看Controller的方法注释
+
+# 联系我
+- email ：642321251@qq.com
