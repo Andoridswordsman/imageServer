@@ -12,6 +12,8 @@
 # 项目使用说明
 1. 需要配置一个FTP服务器,用于存放源图片.imageServer将会根据system.properties中配置的FTP信息进行访问
 2. 如目前有一个FTP服务器上的图片:/image/user/demo.jpg :
-	- 获取200 * 200 像素的业务图片的静态地址 : http://webRoot:8080/getImagePath?path=/image/user/demo.jpg&width=200&height=200
-	- 直接获取显示200 * 200 像素的业务图片 : http://webRoot:8080/image?path=/image/user/demo.jpg&width=200&height=200
+	- 获取200 * 200 像素的业务图片的静态地址 : 
+	http://webRoot:8080/getImagePath?path=/image/user/demo.jpg&width=200&height=200
+	- 直接获取显示200 * 200 像素的业务图片 : 
+	http://webRoot:8080/image?path=/image/user/demo.jpg&width=200&height=200
 	- 具体的param参数的说明请查看Controller的方法注释
