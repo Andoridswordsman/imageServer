@@ -30,9 +30,11 @@ public class FileUtil {
 		File f = new File(fileName);
 		if (!f.exists()) {
 			try {
-				f.createNewFile();
+				if(!f.createNewFile()){
+                    log.warn("文件已存在");
+                }
 			} catch (IOException e) {
-				return "文件读取失败，请检查是否有文件读取权限，或指定文件是否损坏等";
+                log.error("文件读取失败，请检查是否有文件读取权限，或指定文件是否损坏等");
 			}
 		}
 		try {
@@ -45,7 +47,7 @@ public class FileUtil {
             }
             reader.close();
 		} catch (Exception e) {
-            return "文件读取失败，请检查是否有文件读取权限，或指定文件是否损坏等";
+            log.error("文件读取失败，请检查是否有文件读取权限，或指定文件是否损坏等",e);
 		}
 		return text.toString();
 	}
@@ -61,7 +63,9 @@ public class FileUtil {
 		List<String> filesText = new ArrayList<String>();
 		File f = new File(path);
 		if (!f.exists()) {
-			f.mkdirs();
+			if(!f.mkdirs()){
+                log.warn("目录创建失败");
+            }
 		}
 		File[] fs = f.listFiles();
         if(fs == null){
@@ -98,14 +102,18 @@ public class FileUtil {
 		StringBuilder text = new StringBuilder();
 		File f = new File(path);
 		if (!f.exists()) {
-			f.mkdirs();
+            if(!f.mkdirs()){
+                log.warn("目录创建失败");
+            }
 		}
 		f = new File(path + File.separator + fileName);
 		if(!f.exists()){
 			try {
-				f.createNewFile();
+				if(!f.createNewFile()){
+                    log.warn("文件已存在");
+                }
 			} catch (IOException e) {
-                return "文件读取失败，请检查是否有文件读取权限，或指定文件是否损坏等";
+                log.error("文件读取失败，请检查是否有文件读取权限，或指定文件是否损坏等",e);
 			}
 		}
 		try {
@@ -135,13 +143,19 @@ public class FileUtil {
 	public static boolean writeTextToTextFile(String text,String path, String fileName,boolean append) {
 		File f = new File(path);
 		if(!f.exists()){
-			f.mkdirs();
+            if(!f.mkdirs()){
+                log.warn("目录创建失败");
+            }
 		}
 		f = new File(path + File.separator + fileName);
 		if(!f.exists()){
 			try {
-				f.createNewFile();
+				if(!f.createNewFile()){
+                    log.warn("文件创建失败");
+                    return false;
+                }
 			} catch (IOException e) {
+                log.error("文件创建异常",e);
 				return false;
 			}
 		}
@@ -215,7 +229,9 @@ public class FileUtil {
         List<String> fileNames = new ArrayList<>();
         File dir = new File(path);
         if (!dir.exists()) {
-            dir.mkdirs();
+            if(!dir.mkdirs()){
+                log.warn("目录创建失败");
+            }
         }
         File[] fs = dir.listFiles();
         if(fs == null){
