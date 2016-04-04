@@ -29,7 +29,7 @@ public class ShutdownResources implements ServletContextListener {
         log.info("监听处理处理web容器关闭事件");
 
         log.info("关闭线程池");
-        ExecutorFactory.getExecutor().shutdown();
+        ExecutorFactory.EXECUTE.getExecutor().shutdown();
 
     }
 }

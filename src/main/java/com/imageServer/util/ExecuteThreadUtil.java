@@ -15,7 +15,7 @@ import java.util.concurrent.*;
  */
 public class ExecuteThreadUtil {
 
-    private static ExecutorService executorService = ExecutorFactory.getExecutor();
+    private static ExecutorService executorService = ExecutorFactory.EXECUTE.getExecutor();
 
     /**
      * 执行一个无返回值的线程任务
