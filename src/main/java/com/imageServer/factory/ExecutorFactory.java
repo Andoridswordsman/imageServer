@@ -4,7 +4,9 @@ package com.imageServer.factory;/**
  */
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 并发线程执行对象工厂方法
@@ -16,31 +18,25 @@ public enum ExecutorFactory {
 
     EXECUTE;
 
-    private ExecutorService executorService;
+    private static ExecutorService executorService;
 
-    ExecutorFactory(){
-        if(executorService == null){
-            final int cpuCore = Runtime.getRuntime().availableProcessors();
-            //线程数（当前CPU数+1）
-            final int poolSize = cpuCore+1;
-            //定义并发执行服务
-            executorService = Executors.newFixedThreadPool(poolSize);
-
-        }
+    static {
+        final int maxPoolSize = 200;
+        //定义并发执行服务
+        executorService = new ThreadPoolExecutor(5,maxPoolSize,0L, TimeUnit.MILLISECONDS,
+                new SynchronousQueue<>(),
+                r -> {
+                    Thread t=new Thread(r);
+                    t.setName("imageServerThreadPool");
+                    return t;
+                }
+        );
     }
     /**
      * 获取执行类
      * @return
      */
     public ExecutorService getExecutor(){
-        if(executorService == null){
-            final int cpuCore = Runtime.getRuntime().availableProcessors();
-            //线程数（当前CPU数+1）
-            final int poolSize = cpuCore+1;
-            //定义并发执行服务
-            executorService = Executors.newFixedThreadPool(poolSize);
-
-        }
         return executorService;
     }
 
